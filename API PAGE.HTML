@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Cat Facts</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            /* background-color: ; */
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            text-align: center;
+            padding: 10px;
+            height: 100px;
+        }
+
+        h1 {
+            font-size: 36px;
+        }
+
+        .container {
+            text-align: center;
+            margin: 20px;
+            /* border-radius: 20px; */
+            display: flex;
+           
+        }
+
+        #factDisplay {
+            background-color: #ffffff;
+            border: 1px solid #dcdcdc;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            height: 20%;
+            width: 50%;
+            text-align: center;
+            margin-left: 290px;
+        }
+
+        button {
+            background-color: #3498db;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            margin-left: 550px;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+       <marquee scrollAmount="35"><h1>Random Cat Facts</h1></marquee> 
+       <!-- <a href="DARKMODE.HTML">MODE</a> -->
+    </header>
+
+    <div class="container">
+        <div id="factDisplay">
+            <p>Random Cat Facts:</p>
+        </div>
+       
+       
+    </div>
+    <button id="getFactsButton">Get Facts</button>
+    
+    <script>
+        const url = "https://catfact.ninja/fact";
+
+        async function getFacts() {
+            try {
+                let res = await fetch(url);
+                let data = await res.json();
+
+                let res2 = await fetch(url);
+                let data2 = await res2.json();
+
+                const factDisplay = document.getElementById("factDisplay");
+
+                // Apply styles to factDisplay
+                factDisplay.style.backgroundColor = "#ffec40"; 
+                factDisplay.style.border = "2px solid #e6b800"; 
+
+                // Apply styles to the button
+                const getFactsButton = document.getElementById("getFactsButton");
+                getFactsButton.style.backgroundColor = "#ff704d";
+                getFactsButton.style.color = "#000"; 
+
+                factDisplay.innerText = `Random Cat Facts:\n1. ${data.fact}\n2. ${data2.fact}`;
+            } catch (e) {
+                console.log("error - ", e);
+            }
+        }
+
+        const getFactsButton = document.getElementById("getFactsButton");
+        getFactsButton.addEventListener("click", getFacts);
+    </script>
+</body>
+</html>
